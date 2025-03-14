@@ -1,0 +1,13 @@
+name: Log Commit ID
+
+on: push
+
+jobs:
+  log-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Log all GitHub environment variables
+        run: env | grep GITHUB_
