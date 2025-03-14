@@ -10,4 +10,4 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Log all GitHub environment variables
-        run: env | grep GITHUB_
+        run: env 
