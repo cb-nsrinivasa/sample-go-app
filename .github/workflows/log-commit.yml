@@ -1,13 +1,25 @@
-name: Log Commit ID
+name: Build Go Project
 
 on: push
 
 jobs:
-  log-commit:
+  build:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Log all GitHub environment variables
-        run: env 
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21  # Change this to your Go version
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Build the project
+        run: go build -v ./...
+
+      - name: Run tests
+        run: go test -v ./...
