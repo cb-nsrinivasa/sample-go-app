@@ -36,5 +36,6 @@ jobs:
         run: echo "MY_NAME=UpdatedValue" >> $GITHUB_ENV
       - name: log-changed-secret
         run: echo "We retrieved our masked secret $MY_NAME"
-
+      - name: from-gh-secret
+        run: echo "We retrieved secret from gh secret $secrets.MY_SECRET"
         
