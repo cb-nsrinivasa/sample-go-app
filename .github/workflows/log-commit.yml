@@ -37,5 +37,5 @@ jobs:
       - name: log-changed-secret
         run: echo "We retrieved our masked secret $MY_NAME"
       - name: from-gh-secret
-        run: echo "We retrieved secret from gh secret $secrets.MY_SECRET"
+        run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRET }}"
         
