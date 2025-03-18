@@ -25,9 +25,16 @@ jobs:
       - name: Run tests
         run: go test -v ./...
         
-      - name: log-secret
+      - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
-      - name: log-secret2
+      - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
-      - name: log-secret3
+        
+      - name: log-secret-string
         run: echo "We retrieved our masked secret this-secret"
+      - name: Set new value
+        run: echo "MY_NAME=UpdatedValue" >> $GITHUB_ENV
+      - name: log-changed-secret
+        run: echo "We retrieved our masked secret $MY_NAME"
+
+        
