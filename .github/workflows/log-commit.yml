@@ -5,7 +5,8 @@ on: push
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      MY_NAME: "this-secret"
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -23,3 +24,8 @@ jobs:
 
       - name: Run tests
         run: go test -v ./...
+        
+      - name: log-secret
+        run: echo "::add-mask::$MY_NAME"
+      - name: log-secret2
+        run: echo "We retrieved our masked secret: $MY_NAME"
