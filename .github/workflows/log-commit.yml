@@ -38,4 +38,5 @@ jobs:
         run: echo "We retrieved our masked secret $MY_NAME"
       - name: from-gh-secret
         run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRET }}"
-        
+      - name: substring-gh-secret
+        run: echo "${{ secrets.MY_SECRET }}" | awk '{print substr($0, 0, 5)}'
