@@ -37,8 +37,10 @@ jobs:
       - name: log-changed-secret
         run: echo "We retrieved our masked secret $MY_NAME"
       - name: from-gh-secret
-        run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRET }}"
+        run: echo "We retrieved secret from gh secret ${{ secrets.SECRET }}"
       - name: substring-gh-secret
-        run: echo "${{ secrets.MY_SECRET }}" | awk '{print substr($0, 0, 5)}'
+        run: echo "${{ secrets.SECRET }}" | awk '{print substr($0, 0, 5)}'
       - name: substring-redacted-string
         run: echo "$MY_NAME" | awk '{print substr($0, 0, 5)}'
+      - name: wrong secret
+        run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRE }}"
