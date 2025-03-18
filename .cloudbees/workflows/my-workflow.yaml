@@ -9,12 +9,5 @@ on:
 jobs:
   build:
     steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
-        run: |
-          echo "hello worlds"
       - name: Check out my GitHub repo
         uses: https://github.com/cloudbees-io/checkout@v1
-      - name: Log all GitHub environment variables
-        run: env
