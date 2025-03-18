@@ -28,4 +28,4 @@ jobs:
       - name: log-secret
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret2
-        run: echo "We retrieved our masked secret: $MY_NAME"
+        run: echo "We retrieved our masked secret $MY_NAME"
