@@ -25,4 +25,4 @@ jobs:
         
       - name: print-context-secret
         uses: docker://golang:1.20.3-alpine3.17
-        run: echo '${{ secrets.secr1 }}' | awk '{print substr($0, 0, 5)}'
+        run: echo '${{ secrets.secr1 }}  and secretVal'
