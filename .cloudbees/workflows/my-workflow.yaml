@@ -22,3 +22,7 @@ jobs:
       - name: print-context-vars-2
         uses: docker://golang:1.20.3-alpine3.17
         run: echo '${{ vars.prop1 }} asdf ${{ toJSON(vars) }}'
+        
+      - name: print-context-secret
+        uses: docker://golang:1.20.3-alpine3.17
+        run: echo '${{ secret.secr1 }} asdf ${{ toJSON(secret) }}'
