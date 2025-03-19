@@ -30,6 +30,9 @@ jobs:
       - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
         
+      - name: Print GitHub Context Variables
+        run: echo '${{ toJson(github) }}'
+        
       - name: log-secret-string
         run: echo "We retrieved our masked secret this-secret"
       - name: Set new value
