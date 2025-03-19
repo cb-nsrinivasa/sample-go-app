@@ -11,3 +11,7 @@ jobs:
     steps:
       - name: Check out my GitHub repo
         uses: https://github.com/cloudbees-io/checkout@v1
+      - name: echo-env
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: env
