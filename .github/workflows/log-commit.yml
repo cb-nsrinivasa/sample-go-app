@@ -12,7 +12,7 @@ jobs:
       - name: assign-secret-to-env
         run: echo "SEC_ENV=${{ secrets.SECRET }}" >> "$GITHUB_ENV"    
       - id: step1
-        run: echo "test=$(echo "$SEC_ENV" | awk '{print substr($0, 0, 5)}')" >> "$GITHUB_OUTPUT"
+        run: echo "test=${SEC_ENV:0:5}" >> "$GITHUB_OUTPUT"
 
   job2:
     runs-on: ubuntu-latest
