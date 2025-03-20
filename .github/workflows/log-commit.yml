@@ -9,8 +9,10 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.test }}
     steps:
+      - name: assign-secret-to-env
+        run: echo "SEC_ENV=${{ secrets.SECRET }}" >> "$GITHUB_ENV"    
       - id: step1
-        run: echo "test=${{ secrets.SECRET }}" >> "$GITHUB_OUTPUT"
+        run: echo "test=$SEC_ENV" >> "$GITHUB_OUTPUT"
 
   job2:
     runs-on: ubuntu-latest
