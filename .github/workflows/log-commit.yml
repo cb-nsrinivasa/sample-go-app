@@ -51,13 +51,13 @@ jobs:
       - name: chained-command
         run: echo -n "::add-mask::$(date +"%Y%m%d")" && echo "$(date +"%Y%m%d")"
         
-      - name: dynamic-var-without-mask
+      - name: dynamic-var-without-mask-1
         run: echo "$(date +"%Y%m%d")"
 
         
       - name: dynamic-var
         run: echo "::add-mask::$(date +"%Y%m%d")"
         
-      - name: dynamic-var-without-mask
+      - name: dynamic-var-without-mask-2
         run: echo "$(date +"%Y%m%d")"
 
