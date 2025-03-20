@@ -12,8 +12,8 @@ jobs:
   job1:
     runs-on: ubuntu-latest
     outputs:
-      message: ${{ steps.step1.outputs.secret }}
+      message: ${{ steps.step1.outputs.result }}
     steps:
       - name: generate output
-        run: echo "secret=${{ secrets.SECRET }}" >> $GITHUB_ENV
-        
+        id: step1
+        run: echo "result=Job Output Data" >> $GITHUB_ENV
