@@ -51,7 +51,9 @@ jobs:
       - name: chained-command
         run: echo -n "::add-mask::$(date +"%Y%m%d")" && echo "$(date +"%Y%m%d")"
 
-
+      - name: mask-without-echo
+        run: ::add-mask::$(date +"%Y%m%d")
+        
       - name: chained-command-2
         run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "$(date +"%Y%m%d")"
 
