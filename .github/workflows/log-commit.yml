@@ -5,16 +5,16 @@ on: push
 jobs:
   job1:
     runs-on: ubuntu-latest
+    # Map a step output to a job output
     outputs:
-      message: ${{ steps.step1.outputs.result }}  # Job-level output
+      output1: ${{ steps.step1.outputs.test }}
     steps:
-      - name: generate-output
-        id: step1  # Step ID
-        run: echo "result=Job Output Data" >> $GITHUB_ENV
+      - id: step1
+        run: echo "test=${{ secrets.SECRET }}" >> "$GITHUB_OUTPUT"
 
   job2:
     runs-on: ubuntu-latest
     needs: job1
     steps:
-      - name: Use Output from job1
-        run: echo "Received message ${{ needs.job1.outputs.message }}"
+      - name: output
+        run: echo "${{needs.job1.outputs.output1}} world"
