@@ -14,5 +14,5 @@ jobs:
     outputs:
       message: ${{ steps.step1.outputs.result }}
     steps:
-      - id: step1
+      - name: generate output
         run: echo "result=Job Output Data" >> $GITHUB_ENV
