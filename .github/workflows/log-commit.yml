@@ -63,8 +63,37 @@ jobs:
         run: echo "$(date +"%Y%m%d")"
 
         
+
+        
+  log-secret-prefix:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: mark-secret-prefix
+        run: echo "prefix::add-mask::$MY_NAME"
+      - name: log-secret
+        run: echo "We retrieved our masked secret $MY_NAME"
+
+
+  log-secret:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: mark-secret-prefix
+        run: echo "::add-mask::$MY_NAME"
+      - name: log-secret
+        run: echo "We retrieved our masked secret $MY_NAME"
+
+
+
+  log-dynamic-secret:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
       - name: dynamic-var
         run: echo "::add-mask::$(date +"%Y%m%d")"
-        
       - name: dynamic-var-without-mask-2
         run: echo "$(date +"%Y%m%d")"
