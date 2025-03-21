@@ -8,25 +8,23 @@ jobs:
     env:
       MY_NAME: "this-secret"
     steps:
-    #   - name: Checkout repository
-    #     uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    #   - name: Set up Go
-    #     uses: actions/setup-go@v5
-    #     with:
-    #       go-version: 1.21  # Change this to your Go version
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: 1.21  # Change this to your Go version
 
-    #   - name: Install dependencies
-    #     run: go mod tidy
+      - name: Install dependencies
+        run: go mod tidy
 
-    #   - name: Build the project
-    #     run: go build -v ./...
+      - name: Build the project
+        run: go build -v ./...
 
-    #   - name: Run tests
-    #     run: go test -v ./...
-      # - name: mark-secret-1
-      #   run: |
-      #     ::add-mask::$MY_NAME
+      - name: Run tests
+        run: go test -v ./...
+        
       - name: mark-secret-prefix
         run: echo "prefix::add-mask::$MY_NAME"
         
@@ -56,9 +54,7 @@ jobs:
       - name: chained-command
         run: echo -n "::add-mask::$(date +"%Y%m%d")" && echo "$(date +"%Y%m%d")"
 
-      - name: mask-without-echo
-        run: ::add-mask::$(date +"%Y%m%d")
-        
+
       - name: chained-command-2
         run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "$(date +"%Y%m%d")"
 
@@ -72,4 +68,3 @@ jobs:
         
       - name: dynamic-var-without-mask-2
         run: echo "$(date +"%Y%m%d")"
-
