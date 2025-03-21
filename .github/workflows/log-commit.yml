@@ -24,10 +24,12 @@ jobs:
 
     #   - name: Run tests
     #     run: go test -v ./...
-      - name: mark-secret-1
-        run: |
-          ::add-mask::$MY_NAME
-          
+      # - name: mark-secret-1
+      #   run: |
+      #     ::add-mask::$MY_NAME
+      - name: mark-secret-prefix
+        run: echo "prefix::add-mask::$MY_NAME"
+        
       # - name: mark-secret
       #   run: echo "::add-mask::$MY_NAME"
       - name: log-secret
