@@ -50,18 +50,6 @@ jobs:
         run: echo "$MY_NAME" | awk '{print substr($0, 0, 5)}'
       - name: wrong secret
         run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRE }}"
-
-      - name: chained-command
-        run: echo -n "::add-mask::$(date +"%Y%m%d")" && echo "$(date +"%Y%m%d")"
-
-
-      - name: chained-command-2
-        run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "$(date +"%Y%m%d")"
-
-        
-      - name: dynamic-var-without-mask-1
-        run: echo "$(date +"%Y%m%d")"
-
         
 
         
@@ -81,7 +69,7 @@ jobs:
     env:
       MY_NAME: "this-secret"
     steps:
-      - name: mark-secret-prefix
+      - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
@@ -96,4 +84,27 @@ jobs:
       - name: dynamic-var
         run: echo "::add-mask::$(date +"%Y%m%d")"
       - name: dynamic-var-without-mask-2
+        run: echo "$(date +"%Y%m%d")"
+
+
+
+  log-dynamic-secret-chain-command:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: chained-command-2
+        run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "$(date +"%Y%m%d")"
+      - name: dynamic-var-without-mask-1
+        run: echo "$(date +"%Y%m%d")"
+
+
+  log-dynamic-secret-chain-command-with-and :
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: chained-command-2
+        run: echo -n "::add-mask::$(date +"%Y%m%d")" && echo "$(date +"%Y%m%d")"
+      - name: dynamic-var-without-mask-1
         run: echo "$(date +"%Y%m%d")"
