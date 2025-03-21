@@ -3,57 +3,32 @@ name: Build Go Project
 on: push
 
 jobs:
-  build:
+  echo-env-context-vars:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "this-secret"
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.21  # Change this to your Go version
-
-      - name: Install dependencies
-        run: go mod tidy
-
-      - name: Build the project
-        run: go build -v ./...
-
-      - name: Run tests
-        run: go test -v ./...
-        
-      - name: mark-secret-prefix
-        run: echo "prefix::add-mask::$MY_NAME"
-        
-      # - name: mark-secret
-      #   run: echo "::add-mask::$MY_NAME"
-      - name: log-secret
-        run: echo "We retrieved our masked secret $MY_NAME"
-        
       - name: Print GitHub Context Variables
         run: echo '${{ toJson(github) }}'
+      - name: Print GitHub env
+        run: env         
         
-      - name: log-secret-string
-        run: echo "We retrieved our masked secret this-secret"
+  masking-with-prefix:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: mark-secret-prefix
+        run: echo "prefix::add-mask::$MY_NAME"
+      - name: log-secret
+        run: echo "We retrieved our masked secret $MY_NAME"
       - name: Set new value
         run: echo "MY_NAME=UpdatedValue" >> $GITHUB_ENV
       - name: log-changed-secret
         run: echo "We retrieved our masked secret $MY_NAME"
-      - name: from-gh-secret
-        run: echo "We retrieved secret from gh secret ${{ secrets.SECRET }}"
-      - name: substring-gh-secret
-        run: echo "${{ secrets.SECRET }}" | awk '{print substr($0, 0, 5)}'
-      - name: substring-redacted-string
-        run: echo "$MY_NAME" | awk '{print substr($0, 0, 5)}'
-      - name: wrong secret
-        run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRE }}"
         
 
-        
-  log-secret-prefix:
+  changing-masked-env:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "this-secret"
@@ -63,8 +38,7 @@ jobs:
       - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
 
-
-  log-secret:
+  log-masked-string:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "this-secret"
@@ -73,38 +47,50 @@ jobs:
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
+      - name: log-hard-coded-secret-string
+        run: echo "We retrieved our masked secret this-secret"
 
 
-
-  log-dynamic-secret:
+  log-dynamic-masked-cmd:
     runs-on: ubuntu-latest
-    env:
-      MY_NAME: "this-secret"
     steps:
       - name: dynamic-var
         run: echo "::add-mask::$(date +"%Y%m%d")"
-      - name: dynamic-var-without-mask-2
+      - name: dynamic-var-without-mask
         run: echo "$(date +"%Y%m%d")"
 
 
 
-  log-dynamic-secret-chain-command:
+  log-dynamic-masked-chained-cmd:
     runs-on: ubuntu-latest
-    env:
-      MY_NAME: "this-secret"
     steps:
-      - name: chained-command-2
+      - name: mask-using-chained-command
         run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "$(date +"%Y%m%d")"
-      - name: dynamic-var-without-mask-1
+      - name: dynamic-var-without-mask
         run: echo "$(date +"%Y%m%d")"
 
 
-  log-dynamic-secret-chain-command-with-and :
+  log-dynamic-masked-chained-cmd-1:
     runs-on: ubuntu-latest
-    env:
-      MY_NAME: "this-secret"
     steps:
-      - name: chained-command-2
+      - name: mask-using-chained-command
         run: echo -n "::add-mask::$(date +"%Y%m%d")" && echo "$(date +"%Y%m%d")"
-      - name: dynamic-var-without-mask-1
+      - name: dynamic-var-without-mask
         run: echo "$(date +"%Y%m%d")"
+
+
+################################ gh secrets
+  echo-wrong-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: wrong secret
+        run: echo "We retrieved secret from gh secret ${{ secrets.MY_SECRE }}"
+
+  echo-secret:
+    runs-on: ubuntu-latest
+    steps:
+      - name: from-gh-secret
+        run: echo "We retrieved secret from gh secret ${{ secrets.SECRET }}"
+      - name: substring-gh-secret
+        run: echo "${{ secrets.SECRET }}" | awk '{print substr($0, 0, 5)}'
+
