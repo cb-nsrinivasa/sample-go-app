@@ -13,7 +13,7 @@ jobs:
       - name: Print GitHub env
         run: env         
         
-  masking-with-prefix:
+  changing-masked-env-var:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "this-secret"
@@ -28,7 +28,7 @@ jobs:
         run: echo "We retrieved our masked secret $MY_NAME"
         
 
-  changing-masked-env:
+  masking-with-prefix:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "this-secret"
