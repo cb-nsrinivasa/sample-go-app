@@ -19,7 +19,7 @@ jobs:
       MY_NAME: "this-secret"
     steps:
       - name: mark-secret-prefix
-        run: echo "prefix::add-mask::$MY_NAME"
+        run: echo "::add-mask::$MY_NAME"
       - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
       - name: Set new value
@@ -33,7 +33,7 @@ jobs:
       MY_NAME: "this-secret"
     steps:
       - name: mark-secret-prefix
-        run: printf "prefix::add-mask::$MY_NAME"
+        run: printf "::add-mask::$MY_NAME"
       - name: log-secret
         run: printf "We retrieved our masked secret $MY_NAME"
       - name: Set new value
