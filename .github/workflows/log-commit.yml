@@ -18,7 +18,7 @@ jobs:
     env:
       MY_NAME: "this-secret"
     steps:
-      - name: mark-secret-prefix
+      - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret
         run: echo "We retrieved our masked secret $MY_NAME"
@@ -32,7 +32,7 @@ jobs:
     env:
       MY_NAME: "this-secret"
     steps:
-      - name: mark-secret-prefix
+      - name: mark-secret
         run: printf "::add-mask::$MY_NAME"
       - name: log-secret
         run: printf "We retrieved our masked secret $MY_NAME"
