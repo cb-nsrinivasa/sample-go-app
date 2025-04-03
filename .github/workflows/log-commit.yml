@@ -41,6 +41,17 @@ jobs:
       - name: log-changed-secret
         run: printf "We retrieved our masked secret $MY_NAME"
 
+
+  masking-without-any-stdout:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: mark-secret
+        run: ::add-mask::$MY_NAME
+      - name: log-secret
+        run: printf "We retrieved our masked secret $MY_NAME"
+
         
   masking-with-prefix:
     runs-on: ubuntu-latest
