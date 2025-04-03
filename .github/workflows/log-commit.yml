@@ -179,7 +179,7 @@ jobs:
         id: step4
         run: | 
           echo "hardcode=xyz" >> $GITHUB_OUTPUT
-          echo "::add-mask::xyz"
+          # echo "::add-mask::xyz"
 
 
         
