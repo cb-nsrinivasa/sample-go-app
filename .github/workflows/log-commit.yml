@@ -178,8 +178,8 @@ jobs:
       - name: output-hardcoded-secret
         id: step4
         run: | 
+          echo "::add-mask::xyz"
           echo "hardcode=xyz" >> $GITHUB_OUTPUT
-          # echo "::add-mask::xyz"
 
 
         
