@@ -173,7 +173,7 @@ jobs:
         run: echo "sec=$MY_NAME" >> $GITHUB_OUTPUT
       - name: output-masked-substrsecret
         id: step3
-        run: echo "subsec=${MY_NAME:0:5}" >> $GITHUB_OUTPUT        
+        run: echo "subsec=this" >> $GITHUB_OUTPUT        
   
   job2:
     runs-on: ubuntu-latest
