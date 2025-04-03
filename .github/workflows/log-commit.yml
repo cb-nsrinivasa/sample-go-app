@@ -81,6 +81,8 @@ jobs:
     steps:
       - name: echo-env
         run: echo "$MY_NAME"
+      - name: chained-command-without-mask
+        run: echo -n "$MY_NAME" ; echo "random-str"
       - name: mask-using-chained-command
         run: echo -n "::add-mask::$MY_NAME" ; echo "random-str"
       - name: echo-after-mask
