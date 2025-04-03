@@ -74,6 +74,13 @@ jobs:
         run: echo "$(date +"%Y%m%d")"
 
 
+  log-chained-cmd:
+    runs-on: ubuntu-latest
+    steps:
+      - name: mask-using-chained-command
+        run: echo -n "::add-mask::$MY_NAME" ; echo "$(date +"%Y%m%d")"
+      - name: dynamic-var-without-mask
+        run: echo "$MY_NAME"
 
   log-dynamic-masked-chained-cmd:
     runs-on: ubuntu-latest
