@@ -82,7 +82,7 @@ jobs:
       - name: echo-env
         run: echo "$MY_NAME"
       - name: mask-using-chained-command
-        run: echo -n "::add-mask::$MY_NAME" ; echo "$(date +"%Y%m%d")"
+        run: echo -n "::add-mask::$MY_NAME" ; echo "random-str"
       - name: echo-after-mask
         run: echo "$MY_NAME"
 
