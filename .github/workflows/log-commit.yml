@@ -179,9 +179,8 @@ jobs:
         id: step4
         run: | 
           SEC_VAL="xyz"
-          echo "::add-mask::$SEC_VAL" 
+          echo "$SEC_VAL" 
           echo "hardcode=$SEC_VAL" >> $GITHUB_OUTPUT
-
 
         
   job2:
