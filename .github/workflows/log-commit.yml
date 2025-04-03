@@ -161,7 +161,7 @@ jobs:
     outputs:
       message: ${{ steps.step1.outputs.RESULT }}
       sec: ${{ steps.step2.outputs.sec }}
-      subsec: ${{ steps.step2.outputs.subsec }}
+      subsec: ${{ steps.step3.outputs.subsec }}
     steps:
       - name: Step 1 - Generate Output
         id: step1
