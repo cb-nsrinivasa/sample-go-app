@@ -15,6 +15,10 @@ jobs:
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
         run: env
+      - name: echo-
+        uses: docker://golang:1.20.3-alpine3.17
+        shell: sh
+        run: echo "hello world"        
       - name: print-context-vars
         uses: docker://golang:1.20.3-alpine3.17
         shell: sh
