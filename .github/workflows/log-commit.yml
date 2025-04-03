@@ -57,8 +57,6 @@ jobs:
     env:
       MY_NAME: "this-secret"
     steps:
-      - name: echo-env
-        run: echo "$MY_NAME"
       - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret
@@ -79,9 +77,11 @@ jobs:
   log-chained-cmd:
     runs-on: ubuntu-latest
     steps:
+      - name: echo-env
+        run: echo "$MY_NAME"
       - name: mask-using-chained-command
         run: echo -n "::add-mask::$MY_NAME" ; echo "$(date +"%Y%m%d")"
-      - name: dynamic-var-without-mask
+      - name: echo-after-mask
         run: echo "$MY_NAME"
 
   log-dynamic-masked-chained-cmd:
