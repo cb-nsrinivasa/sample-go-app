@@ -76,6 +76,19 @@ jobs:
         run: echo "We retrieved our masked secret this-secret"
 
 
+  log-multi-line-string:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-\nsecret"
+    steps:
+      - name: log-secret-before-mask
+        run: echo "We retrieved our masked secret $MY_NAME"    
+      - name: mark-secret
+        run: echo "::add-mask::$MY_NAME"
+      - name: log-secret
+        run: echo "We retrieved our masked secret $MY_NAME"
+
+
   log-dynamic-masked-cmd:
     runs-on: ubuntu-latest
     steps:
