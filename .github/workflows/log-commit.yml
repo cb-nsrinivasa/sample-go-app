@@ -76,6 +76,8 @@ jobs:
 
   log-chained-cmd:
     runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
     steps:
       - name: echo-env
         run: echo "$MY_NAME"
