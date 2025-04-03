@@ -158,16 +158,18 @@ jobs:
     runs-on: ubuntu-latest
     needs: job1
     steps:
-      - name: Use Output from job1
+      - name: Use message Output from job1
         run: echo "Received message ${{ needs.job1.outputs.message }}"
-
+      - name: Use message2 Output from job1
+        run: echo "Received non secret message ${{ needs.job1.outputs.message2 }}"
         
   job1:
     runs-on: ubuntu-latest
     env:
       MY_NAME: "this-secret"
     outputs:
-      message: ${{ steps.step1.outputs.MY_NAME }}
+      message: ${{ steps.step1.outputs.result }}
+      message2: ${{ steps.step2.outputs.RESULT }}
     steps:
       - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
@@ -175,7 +177,8 @@ jobs:
         run: echo "result=$MY_NAME" >> $GITHUB_ENV
       - name: print-secret
         run: echo "$result"
-
+      - id: step2
+        run: echo "RESULT=Job-Output-Data" >> $GITHUB_ENV
   # changing-masked-env-var:
   #   runs-on: ubuntu-latest
   #   env:
