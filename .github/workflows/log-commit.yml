@@ -57,6 +57,8 @@ jobs:
     env:
       MY_NAME: "this-secret"
     steps:
+      - name: echo-env
+        run: echo "$MY_NAME"
       - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret
