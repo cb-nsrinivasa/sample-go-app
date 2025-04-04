@@ -1,16 +1,40 @@
 apiVersion: automation.cloudbees.io/v1alpha1
 kind: workflow
-name: My workflow
+name: message-passing
+
 on:
   push:
     branches:
       - "**"
-  workflow_dispatch:
+      
 jobs:
-  build:
+  my-job-1:
+    outputs:
+      output1: ${{ steps.step1.outputs.greeting }}
+      output2: ${{ steps.step2.outputs.greeting }}
     steps:
-      - name: Say hello
-        uses: docker://golang:1.20.3-alpine3.17
-        shell: sh
+      - name: My first step
+        uses: docker://alpine:3.18
+        id: step1
         run: |
-          echo "hello worldsssss"
+          echo "starting step1"
+          echo "step1" > "$CLOUDBEES_OUTPUTS/greeting"
+          echo "finished step1"
+      - name: My second step
+        uses: docker://alpine:3.18
+        id: step2
+        run: |
+          echo "starting step2"
+          echo "step2" > "$CLOUDBEES_OUTPUTS/greeting"
+          echo "finished step2"
+
+  my-job-2:
+    needs: my-job-1
+    steps:
+      - env:
+          OUTPUT1: ${{needs.my-job-1.outputs.output1}}
+          OUTPUT2: ${{needs.my-job-1.outputs.output2}}
+        uses: docker://alpine:3.18
+        run: |
+          echo "$OUTPUT1 $OUTPUT2"
+          cat  /cloudbees/scopes-stack-head/scope-0.json 
