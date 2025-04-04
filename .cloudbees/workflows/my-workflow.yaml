@@ -35,7 +35,7 @@ jobs:
         uses: docker://alpine:3.18
         id: step2
         run: |
-          echo "starting step2"
+          echo "starting step2 "
           echo "step2" > "$CLOUDBEES_OUTPUTS/greeting"
           echo "finished step2"
 
