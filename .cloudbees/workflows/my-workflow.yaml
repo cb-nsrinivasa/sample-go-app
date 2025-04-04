@@ -12,14 +12,25 @@ jobs:
     outputs:
       output1: ${{ steps.step1.outputs.greeting }}
       output2: ${{ steps.step2.outputs.greeting }}
+      output3: ${{ steps.step3.outputs.greeting }}
     steps:
       - name: My first step
         uses: docker://alpine:3.18
         id: step1
         run: |
           echo "starting step1"
+          echo ${{secrets.secr1}}
           echo "step1" > "$CLOUDBEES_OUTPUTS/greeting"
           echo "finished step1"
+      - name: My first step
+        uses: docker://alpine:3.18
+        id: step3
+        run: |
+          echo "starting step3"
+          echo ${{secrets.secr1}}
+          echo  ${{secrets.secr1}} > "$CLOUDBEES_OUTPUTS/greeting"
+          echo "finished step3"
+          
       - name: My second step
         uses: docker://alpine:3.18
         id: step2
@@ -36,5 +47,5 @@ jobs:
           OUTPUT2: ${{needs.my-job-1.outputs.output2}}
         uses: docker://alpine:3.18
         run: |
-          echo "$OUTPUT1 $OUTPUT2"
+          echo "$OUTPUT1 $OUTPUT2 $OUTPUT3"
           cat  /cloudbees/scopes-stack-head/scope-0.json 
