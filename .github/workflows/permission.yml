@@ -10,3 +10,5 @@ jobs:
         run: echo "$(whoami)"
       - name: ls
         run: ls -l /
+      - name: process
+        run: ps -ef
