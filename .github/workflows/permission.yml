@@ -1,0 +1,10 @@
+name: Build Go Project
+
+on: push
+
+jobs:
+  echo-env-context-vars:
+    runs-on: ubuntu-latest
+    steps:
+      - name: whoami
+        run: echo '$(whoami)'
