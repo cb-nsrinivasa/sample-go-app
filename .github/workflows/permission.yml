@@ -8,3 +8,5 @@ jobs:
     steps:
       - name: whoami
         run: echo "$(whoami)"
+      - name: ls
+        run: ls -l /
