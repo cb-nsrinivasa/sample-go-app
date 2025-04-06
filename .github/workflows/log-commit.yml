@@ -82,7 +82,9 @@ jobs:
       MY_NAME: "this-\nsecret"
     steps:
       - name: log-secret-before-mask
-        run: echo "We retrieved our masked secret $MY_NAME"    
+        run: echo "We retrieved our masked secret $MY_NAME"
+      - name: log-secret-before-mask-E
+        run: echo -E "We retrieved our masked secret $MY_NAME"   
       - name: mark-secret
         run: echo "::add-mask::$MY_NAME"
       - name: log-secret
