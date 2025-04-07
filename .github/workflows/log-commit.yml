@@ -18,4 +18,4 @@ jobs:
           echo "Contains 'prod': ${{ contains(env.MY_ENV_VAR, 'prod') }}"
           OUTPUT=$(echo "Hello from shell!")
           echo "Shell Output: $OUTPUT"
-          run: echo "contains ${{contains(env.OUTPUT, 'Hello')}}"
+          echo "contains ${{contains(env.OUTPUT, 'Hello')}}"
