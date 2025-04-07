@@ -1,25 +1,21 @@
-name: Build Go Project
+name: Contains from Env Example
 
-on: push
+on:
+  push:
 
 jobs:
-  build:
+  contains-from-env:
     runs-on: ubuntu-latest
+    env:
+      MY_ENV_VAR: "prod-deploy"
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Show environment variable
+        run: echo "MY_ENV_VAR is $MY_ENV_VAR"
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version: 1.21  # Change this to your Go version
-
-      - name: Install dependencies
-        run: go mod tidy
-
-      - name: Build the project
-        run: go build -v ./...
-
-      - name: Run tests
-        run: go test -v ./...
+      - name: Check if MY_ENV_VAR contains 'prod'
+        run: |
+          echo "Contains 'prod': ${{ contains(env.MY_ENV_VAR, 'prod') }}"
+          OUTPUT=$(echo "Hello from shell!")
+          echo "Shell Output: $OUTPUT"
+          run: echo "contains ${{contains(env.OUTPUT, 'Hello')}}"
