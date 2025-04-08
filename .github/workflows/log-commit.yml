@@ -123,7 +123,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: mask-using-chained-command
-        run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "$(date +"%Y%m%d")"
+        run: echo -n "::add-mask::$(date +"%Y%m%d")" ; echo "::add-mask::$(date +"%Y%m%d")"
       - name: dynamic-var-without-mask
         run: echo "$(date +"%Y%m%d")"
 
