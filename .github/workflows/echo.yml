@@ -14,3 +14,7 @@ jobs:
         run: echo -n "::add-mask::$MY_NAME" ; echo "random-str"
       - name: echo after mask
         run: echo "$MY_NAME"
+      - name: mask-using-chained-command-2
+        run: echo "::add-mask::$MY_NAME" ; echo "random-str"
+      - name: echo after mask
+        run: echo "$MY_NAME"
