@@ -43,4 +43,6 @@ jobs:
       - name: multiline-echo
         run: echo -e "Line one\nLine two\nLine three" > filename.txt
       - name: cat file
-        run: cat filename.txt
+        run: echo "$(cat filename.txt)"
+      - name: mask
+        run: echo "::add-mask::$(cat filename.txt)"
