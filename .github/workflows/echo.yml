@@ -10,6 +10,8 @@ jobs:
     steps:
       - name: chained-command-without-mask
         run: echo -n "$MY_NAME" ; echo "random-str"
+      - name: chained-command-without-mask-newline
+        run: echo "$MY_NAME" ; echo "random-str"        
       - name: mask-using-chained-command
         run: echo -n "::add-mask::$MY_NAME" ; echo "random-str"
       - name: echo after mask-chained-command
