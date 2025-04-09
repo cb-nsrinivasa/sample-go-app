@@ -32,3 +32,15 @@ jobs:
         run: echo "::add-mask::$MY_NAME" ; echo "random-str"
       - name: echo after mask
         run: echo "$MY_NAME"
+
+
+
+  multiline-echo:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: multiline-echo
+        run: echo -e "Line one\nLine two\nLine three" > filename.txt
+      - name: cat file
+        run: cat filename.txt
