@@ -46,3 +46,5 @@ jobs:
         run: echo "$(cat filename.txt)"
       - name: mask
         run: echo "::add-mask::$(cat filename.txt)"
+      - name: cat file
+        run: echo "$(cat filename.txt)"
