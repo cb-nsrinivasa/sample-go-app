@@ -61,3 +61,5 @@ jobs:
         run: echo "my-secret=$MY_NAME" >> "$GITHUB_OUTPUT"
       - name: output-get
         run: echo "secrert ${{steps.sets-a-secret.outputs.my-secret}}"
+      - name: output-ls
+        run: ls ${{steps.sets-a-secret.outputs.my-secret}}
