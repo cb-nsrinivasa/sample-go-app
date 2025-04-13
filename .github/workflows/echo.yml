@@ -63,3 +63,5 @@ jobs:
         run: echo "secrert ${{steps.sets-a-secret.outputs.my-secret}}"
       - name: output-ls
         run: ls $GITHUB_OUTPUT
+      - name: output-cat
+        run: cat $GITHUB_OUTPUT
