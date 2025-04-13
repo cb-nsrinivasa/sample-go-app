@@ -48,3 +48,16 @@ jobs:
         run: echo "::add-mask::$(cat filename.txt)"
       - name: cat file
         run: echo "$(cat filename.txt)"
+        
+  secret-output:
+    runs-on: ubuntu-latest
+    env:
+      MY_NAME: "this-secret"
+    steps:
+      - name: mask
+        run: echo "::add-mask::$MY_NAME"
+      - name: output-put
+        id: sets-a-secret
+        run: echo "my-secret=$MY_NAME" >> "$GITHUB_OUTPUT"
+      - name: output-get
+        run: echo "secrert ${{steps.sets-a-secret.outputs.my-secret}}"
