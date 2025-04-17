@@ -65,3 +65,15 @@ jobs:
         run: ls $GITHUB_OUTPUT
       - name: output-cat
         run: cat $GITHUB_OUTPUT
+
+  multiline:
+    runs-on: ubuntu-latest
+    env:
+      multiline: "line1\nline2"
+    steps:
+      - name: mask-first-line
+        run: echo "::add-mask::line1"
+      - name: mask-second-line
+        run: echo "::add-mask::line2"
+      - name: echo-multiline-secret
+        run: echo "$MY_NAME"
