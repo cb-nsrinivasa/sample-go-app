@@ -1,0 +1,19 @@
+name: ascii
+
+on: push
+
+jobs:
+
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      secret-value: ${{ steps.step1.outputs.secret }}
+    steps:
+      - id: step1
+        run: |
+          echo "Hello, 世界"
+          echo "::add-mask::Hello, 世界"
+          echo "Hello, 世界"
+         
+
+          
